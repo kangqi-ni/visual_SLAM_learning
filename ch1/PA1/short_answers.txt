@@ -1,0 +1,43 @@
+Q2： 1. apt-get的步骤：a.扫描本地的软件包更新列表，找到最新版本的软甲包。
+		      b.对依赖关系进行检查，找到所有依赖的软件包。
+		      c.从软件源的镜像站中，下载相关软件包。
+		      d.解压软件包，并完成安装和配置。
+       Ubuntu管理依赖和版本：Ubuntu使用了Deb管理工具，即APT包管理工具。这个工具会从软件源库里调用所需要的包，并且分析和解决依赖关系。安装制定版本的软件，只要在安装时制定版本即可。
+    2. 软件源代指debian系统应用程序的安装包仓库，apt会从软件源中下载软件。
+       /ect/apt/sources.list中记录了Ubuntu的官方软件源的地址。在其中可以替换系统自带的软件源。
+       安装第三方软件源的软件可以使用sudo apt-get install <pkg>
+    3. 除了apt-get之外，安装第三方软件可以使用pip/conda或者dpkg命令。
+       其他发行版中，Red Hat使用RPM管理软件包，Arch Linux使用Pacman管理软件包。
+    4. PATH：系统通过PATH获取可执行文件所在的位置, 并运行可执行文件。
+       LD_LIBRARY_PATH: 系统在编译并且链接后，使用LD_LIBRARY_PATH来搜索动态库。
+       ldcofig： 动态库管理命令，为了让动态库为系统使用，需要运行ldconfig。可以用于搜索出可共享的动态库，并创建出倒入程序所需的链接和缓存文件。
+    5. Linux的文件权限有三种r(read), w(write), x(executable), -(no permission)
+       权限的修改可以使用chmod： chmod [OPTIONS] MODE FILE...
+    6. Linux操作系统是多用户的分时操作系统，将用户分为组，每个用户都属于某个组，每个用户都需要进行身份验证，同时用户只能在所属组所拥有的权限内工作，这样不仅方便管理，而且增加了系统的安全性。用户分为普通用户，管理员用户（root用户）和系统用户。常见的用户组为普通用户组，系统用户组，私有用户组。
+    7. 常见的编译器为gcc和g++，电脑默认为g++，支持c++11标准。
+
+Q3: 1. SLAM在AR/VR，自动驾驶，无人机，移动机器人领域应用到。
+    2. 定位是为了精确地确定设备在环境中的位姿，建图将周围环境的观测部分整合到一个单一的模型中。最初定位和建图是两个相互独立的关系，后来发现这两个步骤是相互依赖的。建图精度依赖于定位精度，而定位的实现又离不开精确的建图。
+    3. SLAM的发展历史可以分为以下几个阶段：
+   	(1) 基于概率统计和卡尔曼滤波的SLAM
+   	(2) 基于视觉的SLAM和基于优化的后端
+   	(3) 多传感器，语义，深度学习结合的SLAM
+    4. SLAM系统前后端的结构区分出现在基于视觉的SLAM方法之后。前端里程计将传感器数据抽象成适用于估计的模型，估算相邻图像间相机的运动，以及局部地图。后端在经由前端处理的抽象数据上执行推理， 使用不同时刻里程计测量的位姿，以及回环检测的信息，对它们进行优化，得到全局一致的轨迹和地图。前后端所实现的功能不同，目的不同。
+    5. [1] Davison A J, Reid I D, Molton N D, et al. MonoSLAM: real-time single camera SLAM[J]. IEEE Transactions on Pattern Analysis and Machine Intelligence, 2007, 29(6):1052-1067.
+       [2] R. Mur-Artal, J. M. M. Montiel, and J. D. Tardós. ORB-SLAM: a Versatile and Accurate Monocular SLAM System. IEEE Transactions on Robotics (TRO), 31(5):1147–1163, 2015.
+       [3] J. Zhang and S. Singh, “Loam: Lidar odometry and mapping in realtime.” in Robotics: Science and Systems, vol. 2, no. 9, 2014.
+
+Q4: See q4_cmake_practice
+
+Q5: See q5_gframework_practice
+
+Q6:1. See q6_ORB_SLAM_preview
+   2. (a) ORB_SLAM 编译多个可执行文件并链接了动态库
+       动态库文件libORB_SLAM2.so由src目录下的.cc的文件生成，链接了第三方库，并保存在lib目录下
+       可执行文件为rgbd_tum, stereo_kitti, stereo_euroc, mono_tum, mono_kittit, mono_euroc
+   (b) include：动态库源代码.cc文件的头文件
+       src:动态库源代码.cc文件
+       Example: 不同模式下(monocular, stereo, rgbd)运行数据集的.cc文件和数据集的.yaml参数文件
+   (c) 所有可执行文件都链接了libORB_SLAM2.so, 这个库包含了src下的文件以及其他第三方库的依赖，例如opencv, eigen, pangolin, g2o, csparse, dbow2 
+
+Q7: See q7_ORB_SLAM_test

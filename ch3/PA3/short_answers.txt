@@ -1,0 +1,28 @@
+2. 1. {Z,+}是群
+      封闭性：∀ z1, z2 ∈ Z, z1 + z2 ∈ Z
+      结合律：∀ z1, z2, z3 ∈ Z, (z1 + z2) + z3 = z1 + (z2 + z3)
+      幺元：∃ 0 ∈ Z，s.t ∀ z ∈ Z, 0 + z = z + 0
+      逆： ∀ z ∈ Z, ∃ -z ∈ Z s.t. z + (-z) = 0
+   2. {N, +}不是群
+      逆：∀ n ∈ N,不存在n^{-1} s.t. n + (n^{-1}) = 0 因为逆必须为-n，但-n不属于N
+   3.  阿贝尔群又称交换群或可交换群，它由自身的集合G和二元运算*构成，它除了满足一般的群公理之外，还满足交换律。因为阿贝尔群的群运算满足交换律和结合律，群元素乘积的值与乘法运算时的次序无关。矩阵乘法构成的群不是阿贝尔群，因为矩阵乘法不满足交换律。
+   
+3. 封闭性：∀a, b ∈ R^3, a x b ∈ R^3
+   双线性：∀a, b, c ∈ R^3, ∀ m, n ∈ R, (m*a + n*b) x c = m*a x c + n*b x c
+                                        a x (m*b + n*c) = a x m*b + a x n*c
+   自反性：∀a ∈ R^3，a x a = 0
+   雅可比等价: ∀a, b, c ∈ R^3, a x (b x c) + b x (c x a) + c x (a x b) 
+                               = b(a ⋅ c) - c(a ⋅ c) + c(b ⋅ a) - a(b ⋅ c) + a(c ⋅ b) - b(c ⋅ a) = 0
+   g = (R^3, R, x）构成李代数
+
+4. See q4_se3_exp_map_derivation.pdf
+
+5. See q5_adjoint_derivation.pdf
+
+6. See q6_derivative_derivation.pdf
+
+7. (1) Twc的平移部分为相机在世界坐标系下的位置，画出连续时间的Twc平移部分就得到了连续时间下相机在世界坐标系中的位置，即相机轨迹
+   (2) See q7_trajectory_viz
+
+8. See q8_trajectory_error_analysis
+                               

@@ -1,0 +1,58 @@
+q2: See q2_undistort_image
+
+q3: 1. 鱼眼相机最重要的一个优势就是相比于普通针孔相机拥有更宽阔的视野。因此可以确保在一段时间里，尽可能多的视觉特征进入相机视野，从而提高对特征匹配的成功率，更不容易丢失。
+    2. 设世界坐标有一点P
+       在相机坐标系中的坐标为Pc = RP + t
+       设Pc= [x, ,y, z]^T
+       a = x/z, b = y/z
+       r = sqrt(a^2 + b^2)
+       theta = atan(r)       
+       theta_d = theta * (1 + k1*theta^2 + k2*theta^3 + k3*theta^6 + k4*theta^8)
+       x' = theta_d / r * a
+       y' = theta_d / r * b
+       u_undistorted = fx * (x' + alpha*y') + cx
+       v_undistorted = fy * y' + cy
+    3. See q3_undistort_fisheye
+    4. 鱼眼畸变模型，实际上是关于入射角θ的奇函数，因此鱼眼镜头的畸变也是对θ的畸变，不能用简单的畸变多项式来描述。：取泰勒展开前五项来近似鱼眼模型，k1-k4取0，相当于只近似了第一项，所以说仍然可以完成去畸变的操作。
+    5. 鱼眼图一般为圆形，边缘的信息被压缩的很密，经过去除畸变后原图中间的部分会被保留的很好，而边缘位置一般都会被拉伸的很严重、视觉效果差，所以通常会进行切除，因此肯定会带来图像内容的损失。增大去畸变时图像的尺寸，或者使用单目相机和鱼眼相机图像进行融合，补全丢失的信息。
+    
+q4: 1. (z - f)/z = (b - uL + uR) / b
+       z = f * b / d, where d = uL - uR
+       
+       Z * [u] = [fx 0  cx] * [X]
+           [v]   [0  fy cy]   [Y]
+           [1]   [0  0   1]   [Z]
+       X = (u - cx) / fx * z
+       Y = (u - cy) / fy * z
+       Z = z
+       
+       u = fx * X/Z + cx
+       v = fy * Y/Z + cy
+       
+    2. 在视差这一块，使用右眼相机坐标减去左眼相机坐标，disparity = x_r - x_l。使用右眼相机的投影像素点，另外使用左眼相机的外参。
+    3. See q4_stereo_disparity
+    
+q5: 1. A ∈ Rnxn, x ∈ R, d(A*x)/dx = A^T
+    2. A ∈ Rnxn, x ∈ R, d(x^T*A*x)/dx = (A + A^T)*x
+    3. x^T*A*x = x1 * Σ(a1i*xi) + ... + xn * Σ(ani*xi)
+       A*x*x^T(i,i) = xi * Σaij*xj
+       tr(A*x*x^T) = x1 * Σ(a1i*xi) + ... + xn * Σ(ani*xi)
+       so x^T*A*x = tr(A*x*x^T)
+       
+q6: See q6_gaussian_newton
+
+q7: 1. e = z - Hx 
+       [v1-(x1-x0)] = [v1] - H[x0]
+       [v2-(x2-x1)]   [v2]    [x1]
+       [v3-(x3-x2)]   [v2]    [x2]
+       [y1-x1    ]    [y1]    [x3]
+       [y2-x2    ]    [y2]
+       [y3-x3    ]    [y3] 
+       so H = [-1 1 0 0]
+              [0 -1 1 0]
+              [0 0 -1 1]
+              [0 1  0 0]
+              [0 0  1 0]
+              [0 0  0 1]
+    2. W = diag(Q1,Q2,Q3,R1,R2,R3)
+    3. x = (H^T*Σ^{-1}*H)^{-1}*H^T*Σ^{-1}*y      

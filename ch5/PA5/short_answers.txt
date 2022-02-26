@@ -1,0 +1,21 @@
+q2.1-3: See q2_compute_ORB
+
+q2.4: 1. 因为ORB描述子是256位的二进制码进行描述的。
+      2. 50是通过多次实验得到的经验值。阈值变大匹配到的点数增加，匹配错误会增加，阈值变小匹配点数减少。
+      3. 使用暴力匹配方法在我电脑上大概需要3秒左右。flann可以更快地匹配特征。
+      4. 在计算角度的多线程代码计算时间比单线程慢。compute angle平均调用时间为1.43249毫秒，而 compute angle mt 平均调用时间为8.1067毫秒。也许线程调用也需要花费很多时间，导致多线程较慢。计算描述子的并行实现速度明显比单线程快很多。compute orb descriptor 平均调用时间为11.5814/1 毫秒，而compute orb descriptor mt 平均调用时间为2.6678毫秒。
+
+13: See q3_recover_pose
+
+q4: 1. 重投影误差：设有p3d, p2d, Tcw
+       p_cam = Tcw * p3d
+       [u_e v_e]^T = K * p_cam / p_cam.z
+       error = p2d - [u_e v_e]^T
+      
+    2. For p_cam = [X' Y' Z']^T
+       J = [fx/Z' 0    -fx*X'Z'^2   -fx*X'*Y'         fx +fx*X'/Z'^2  -fx*Y'/Z']
+           [0     fy/Z' -fy*Y'/Z'^2 -fy+fy*Y'^2/Z/^2  fy*X'*Y'/Z'^2    fy*X'/Z'] 
+ 	               
+    3. T_estimated = exp(dx) * T_estimated
+        
+q5: See q5_align_trajectory_icp

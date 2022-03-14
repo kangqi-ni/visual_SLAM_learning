@@ -1,7 +1,0 @@
-[
-{
-  "directory": "/home/kevin/Documents/vSLAM_learning/ch7/PA7/directBA/build",
-  "command": "/bin/clang++-10  -DCERES_FOUND -I/home/kevin/Documents/vSLAM_learning/ch7/PA7/directBA -I/usr/include/suitesparse -isystem /usr/include/eigen3 -isystem /usr/local/include/opencv4  -O3 -DNDEBUG   -o CMakeFiles/directBA.dir/directBA.cpp.o -c /home/kevin/Documents/vSLAM_learning/ch7/PA7/directBA/directBA.cpp",
-  "file": "/home/kevin/Documents/vSLAM_learning/ch7/PA7/directBA/directBA.cpp"
-}
-]

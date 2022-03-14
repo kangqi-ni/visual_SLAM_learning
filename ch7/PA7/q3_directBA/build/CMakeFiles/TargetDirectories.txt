@@ -1,3 +1,0 @@
-/home/kevin/Documents/vSLAM_learning/ch7/PA7/directBA/build/CMakeFiles/edit_cache.dir
-/home/kevin/Documents/vSLAM_learning/ch7/PA7/directBA/build/CMakeFiles/rebuild_cache.dir
-/home/kevin/Documents/vSLAM_learning/ch7/PA7/directBA/build/CMakeFiles/directBA.dir

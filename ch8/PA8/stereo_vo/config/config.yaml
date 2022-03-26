@@ -1,12 +1,6 @@
 %YAML:1.0
 # data
-dataset_dir: /home/kevin/Documents/Dataset/Kitti/dataset/sequences/00
-
-# # camera intrinsics
-# camera.fx: 517.3
-# camera.fy: 516.5
-# camera.cx: 325.1
-# camera.cy: 249.7
+dataset_dir: path_to_dataset
 
 num_features: 150
 min_num_features_init: 50

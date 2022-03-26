@@ -16,7 +16,7 @@ int main(int argc, char** argv){
     google::InitGoogleLogging(argv[0]);
     google::SetStderrLogging(google::GLOG_INFO);
 
-    const std::string config_file_path = "/home/kevin/Documents/visual_SLAM_learning/ch8/PA8/stereo_vo/config/config.yaml";
+    const std::string config_file_path = "config/config.yaml";
     stereo_vo::System system (config_file_path);
     system.Init();
     system.Track();

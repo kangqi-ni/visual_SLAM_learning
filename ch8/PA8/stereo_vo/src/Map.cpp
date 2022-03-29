@@ -8,7 +8,7 @@ namespace stereo_vo {
 Map::Map():max_num_active_keyframes_(7) {}
 
 void Map::InsertKeyframe(Frame::Ptr frame) {
-    // std::unique_lock<std::mutex> lock(keyframes_mutex_);
+    std::unique_lock<std::mutex> lock(keyframes_mutex_);
 
     current_frame_ = frame;
 
@@ -30,7 +30,7 @@ void Map::InsertKeyframe(Frame::Ptr frame) {
 }
 
 void Map::InsertMappoint(Mappoint::Ptr mappoint) {
-    // std::unique_lock<std::mutex> lock(mappoints_mutex_);
+    std::unique_lock<std::mutex> lock(mappoints_mutex_);
 
     // Add a new mappoint
     if (mappoints_.find(mappoint->GetId()) == mappoints_.end()){
@@ -48,9 +48,6 @@ void Map::RemoveOldKeyframes() {
     if (current_frame_ == nullptr) {
         return;
     }
-
-    // std::unique_lock<std::mutex> lock1(keyframes_mutex_);
-    // std::unique_lock<std::mutex> lock2(mappoints_mutex_);
 
     // Find the nearest and farthest active keyframe
     float max_dist = 0, min_dist = FLT_MAX;
@@ -107,6 +104,8 @@ void Map::RemoveOldKeyframes() {
             mappoint->RemoveObservation(feature);
         }
     }
+
+    std::unique_lock<std::mutex> lock(mappoints_mutex_);
 
     // Remove mappoints
     size_t num_mappoints_removed = 0;
